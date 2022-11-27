@@ -7,6 +7,8 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
     InputTextMessageContent
 from TeamTeleRoid.forcesub import ForceSub
 import asyncio
+from aiohttp import web
+from plugins import web_server
 
 # Bot Client for Inline Search
 Bot = Client(
@@ -22,6 +24,12 @@ User = Client(
     api_id=Config.API_ID,
     api_hash=Config.API_HASH
 )
+
+#web-response
+        app = web.AppRunner(await web_server())
+        await app.setup()
+        bind_address = "0.0.0.0"
+        await web.TCPSite(app, bind_address, PORT).start()
 
 @Bot.on_message(filters.private & filters.command("start"))
 async def start_handler(_, event: Message):
