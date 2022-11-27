@@ -31,7 +31,7 @@ async def start_handler(_, event: Message):
         await app.setup()
         bind_address = "0.0.0.0"
         await web.TCPSite(app, bind_address, PORT).start()
-	await event.reply_photo("https://te.legra.ph/file/965fdc73a8bee02b968a3.jpg"),
+	await event.reply_photo("https://te.legra.ph/file/965fdc73a8bee02b968a3.jpg")
                                 caption=Config.START_MSG.format(event.from_user.mention),
                                 reply_markup=InlineKeyboardMarkup([
                                     [InlineKeyboardButton("Our Channel", url="https://t.me/DTG_TV"),
