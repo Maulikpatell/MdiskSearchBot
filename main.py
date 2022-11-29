@@ -27,10 +27,6 @@ User = Client(
         
 @Bot.on_message(filters.private & filters.command("start"))
 async def start_handler(_, event: Message):
-        app = web.AppRunner(await web_server())
-        await app.setup()
-        bind_address = "0.0.0.0"
-        await web.TCPSite(app, bind_address, PORT).start()
 	
     await event.reply_photo("https://te.legra.ph/file/165941ae764a56d6d9c89.jpg",
                                 caption=Config.START_MSG.format(event.from_user.mention),
@@ -131,6 +127,10 @@ async def button(bot, cmd: CallbackQuery):
 			),
 			parse_mode="html"
 		)
+        app = web.AppRunner(await web_server())
+        await app.setup()
+        bind_address = "0.0.0.0"
+        await web.TCPSite(app, bind_address, PORT).start()
 
 # Start Clients
 Bot.start()
